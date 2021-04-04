@@ -3,13 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { MainComponent } from './main/main.component';
-import { RegComponent } from './reg/reg.component';
-import { AuthComponent } from './auth/auth.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './component/header/header.component';
+import { MainComponent } from './component/main/main.component';
+import { RegComponent } from './component/reg/reg.component';
+import { AuthComponent } from './component/auth/auth.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { HomeComponent } from './component/home/home.component';
 import { RouterModule, Routes} from "@angular/router";
+import { FooterComponent } from './component/footer/footer.component';
+import { FormsModule } from "@angular/forms";
+import { CheckFormService } from "./service/check-form.service"
 
 const appRoute: Routes = [
   {path: '', component:HomeComponent},
@@ -26,14 +29,18 @@ const appRoute: Routes = [
     RegComponent,
     AuthComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoute)
+    RouterModule.forRoot(appRoute),
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    CheckFormService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

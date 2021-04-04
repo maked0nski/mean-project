@@ -1,0 +1,10 @@
+<h1>Форма реєстрації</h1>
+<form (submit)="userRegisterClick()">
+    <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="Вкажіть ім'я" class="form-control"><br>
+    <input type="text" [(ngModel)]="secondName" name="secondName" placeholder="Вкажіть прізвище" class="form-control"><br>
+    <input type="text" [(ngModel)]="phone" name="phone" placeholder="Вкажіть номер телефону" class="form-control"><br>
+    <input type="text" [(ngModel)]="email" name="email" placeholder="Вкажіть електронну пошту" class="form-control"><br>
+    <input type="text" [(ngModel)]="login" name="login" placeholder="Вкажіть Логін" class="form-control"><br>
+    <input type="text" [(ngModel)]="password" name="password" placeholder="Вкажіть пароль" class="form-control"><br>
+  <button class="btn btn-success" type="submit">Зареєструватися</button>
+</form>
