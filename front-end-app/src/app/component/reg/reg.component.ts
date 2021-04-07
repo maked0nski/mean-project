@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CheckFormService } from '../../service/check-form.service';
 
 @Component({
   selector: 'app-reg',
@@ -15,11 +16,12 @@ export class RegComponent implements OnInit {
   password: String | undefined;
 
 
-  constructor() { }
+  constructor(private checkForm: CheckFormService) { }
 
   ngOnInit(): void {
   }
 
+  // @ts-ignore
   userRegisterClick() {
     const user = {
       firstName:  this.firstName,
@@ -29,7 +31,26 @@ export class RegComponent implements OnInit {
       login: this.login,
       password: this.password
     };
-    console.log(user)
+    if(!this.checkForm.checkFirstName(user.firstName)){
+      console.log("Введіть Ваше ім'я")
+      return false;
+    } else if(!this.checkForm.checkSecondName(user.secondName)){
+      console.log("Введіть Ваше прізвище")
+      return false;
+    } else if(!this.checkForm.checkEmail(user.email)){
+      console.log("Введіть Ваш e-mail")
+      return false;
+    } else if(!this.checkForm.checkPhone(user.phone)){
+      console.log("Введіть Ваш номер телефону")
+      return false;
+    } else if(!this.checkForm.checkLogin(user.login)){
+      console.log("Введіть Ваш логін")
+      return false;
+    } else if(!this.checkForm.checkPassword(user.password)){
+      console.log("Введіть Ваш пароль")
+      return false;
+    }
+
   }
 
 }
