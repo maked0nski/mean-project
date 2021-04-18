@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CheckFormService {
 
   constructor() { }
+
+
 
   checkFirstName(firstName: String | undefined) {
   if(firstName == undefined)
@@ -48,7 +51,4 @@ export class CheckFormService {
   else
     return true;
   }
-
-// № 6 Форма регистрации 19 минута
-
 }

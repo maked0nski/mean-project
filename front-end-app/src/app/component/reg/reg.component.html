@@ -1,10 +1,120 @@
-<h1>Форма реєстрації</h1>
-<form (submit)="userRegisterClick()">
-    <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="Вкажіть ім'я" class="form-control"><br>
-    <input type="text" [(ngModel)]="secondName" name="secondName" placeholder="Вкажіть прізвище" class="form-control"><br>
-    <input type="text" [(ngModel)]="phone" name="phone" placeholder="Вкажіть номер телефону" class="form-control"><br>
-    <input type="text" [(ngModel)]="email" name="email" placeholder="Вкажіть електронну пошту" class="form-control"><br>
-    <input type="text" [(ngModel)]="login" name="login" placeholder="Вкажіть Логін" class="form-control"><br>
-    <input type="text" [(ngModel)]="password" name="password" placeholder="Вкажіть пароль" class="form-control"><br>
-  <button class="btn btn-success" type="submit">Зареєструватися</button>
+<!--<div class="text-center form-signin">-->
+<!--  <form class="form-horizontal">-->
+<!--    <img class="mb-4" src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
+
+
+<!--    <h1 class="h3 mb-3 fw-normal">Форма реєстрації</h1>-->
+
+<!--    <div class="form-group">-->
+<!--      <div class="col-sm-4 text-center mb-4">-->
+<!--        <input class="form-control" type="text" id="firstName"  formControlName="firstName" placeholder="Вкажіть ім'я">-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-4 mb-4">-->
+<!--        <input class="form-control" type="text" id="secondName" formControlName="secondName" placeholder="Вкажіть прізвище">-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-4 mb-4">-->
+<!--        <input class="form-control" type="text" id="phone" formControlName="phone" placeholder="Вкажіть номер телефону">-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-4 mb-4">-->
+<!--        <input class="form-control" type="text" id="email" formControlName="email" placeholder="Вкажіть електронну пошту">-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-4 mb-4">-->
+<!--        <input class="form-control" type="text" id="login" formControlName="login" placeholder="Вкажіть Логін">-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-4 mb-4">-->
+<!--        <input class="form-control" type="text" id="password" formControlName="password" placeholder="Вкажіть пароль">-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--    <div>-->
+<!--      {{RegisterForm.value | json}}-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <div class="col-sm-offset-2 col-sm-10">-->
+<!--        <button type="submit" class="btn btn-success">Зареєструватися</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+
+<!--</div>-->
+
+<div class="container">
+<form [formGroup]="RegisterForm" (submit)="onSubmit()">
+
+  <h1 class="h3 mb-3 fw-normal">Форма реєстрації</h1>
+
+  <div class="row mb-4">
+    <div class="col">
+      <div class="form-outline">
+        <input type="text" formControlName="firstName" id="firstName" placeholder="Ім'я" class="form-control" />
+        <label class="form-label" for="firstName"> </label>
+        <div class="error" *ngIf="isControlInvalid('firstName')">
+          Ім'я напишіть українською мовою
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <input type="text" formControlName="secondName" id="secondName" placeholder="Прізвище" class="form-control" />
+        <label class="form-label" for="secondName"> </label>
+        <div class="error" *ngIf="isControlInvalid('secondName')">
+          Прізвище напишіть українською мовою
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Number input -->
+  <div class="form-outline mb-4">
+    <input type="number" formControlName="phone" id="phone" placeholder="№ телефону" class="form-control" />
+    <label class="form-label" for="phone"> </label>
+    <div class="error" *ngIf="isControlInvalid('phone')">
+      Вкажіть Ваш № телефону
+    </div>
+  </div>
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" formControlName="email" id="email" placeholder="email" class="form-control" />
+    <label class="form-label" for="email"> </label>
+    <div class="error" *ngIf="isControlInvalid('email')">
+      Вкажіть вірний email
+    </div>
+  </div>
+
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+    <input type="text" formControlName="login" id="login" placeholder="login" class="form-control" />
+    <label class="form-label" for="login"> </label>
+    <div class="error" *ngIf="isControlInvalid('login')">
+      Вкажіть login
+    </div>
+  </div>
+
+  <!-- Text input -->
+  <div class="form-outline mb-4">
+    <input type="text" formControlName="password" id="password" placeholder="password" class="form-control" />
+    <label class="form-label" for="password"> </label>
+    <div class="error" *ngIf="isControlInvalid('password')">
+      Вкажіть password
+    </div>
+  </div>
+
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Зареєструватися</button>
+
+
+  <div>
+    {{RegisterForm.value | json}}
+  </div>
+
 </form>
+</div>

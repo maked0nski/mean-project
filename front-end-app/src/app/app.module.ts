@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -11,7 +11,6 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HomeComponent } from './component/home/home.component';
 import { RouterModule, Routes} from "@angular/router";
 import { FooterComponent } from './component/footer/footer.component';
-import { FormsModule } from "@angular/forms";
 import { CheckFormService } from "./service/check-form.service"
 
 const appRoute: Routes = [
@@ -34,9 +33,10 @@ const appRoute: Routes = [
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoute),
-    FormsModule
+    FormsModule,
   ],
   providers: [
     CheckFormService

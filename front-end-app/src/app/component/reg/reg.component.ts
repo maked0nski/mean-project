@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckFormService } from '../../service/check-form.service';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
 
 @Component({
   selector: 'app-reg',
@@ -8,49 +9,66 @@ import { CheckFormService } from '../../service/check-form.service';
 })
 export class RegComponent implements OnInit {
 
-  firstName: String | undefined;
-  secondName: String | undefined;
-  phone: String | undefined;
-  email: String | undefined;
-  login: String | undefined;
-  password: String | undefined;
+  // @ts-ignore
+  RegisterForm: FormGroup;
 
 
-  constructor(private checkForm: CheckFormService) { }
+  constructor(
+    private fb: FormBuilder,
+  ) {}
 
   ngOnInit(): void {
+    this.initForm();
   }
 
-  // @ts-ignore
-  userRegisterClick() {
-    const user = {
-      firstName:  this.firstName,
-      secondName: this.secondName,
-      phone: this.phone,
-      email: this.email,
-      login: this.login,
-      password: this.password
-    };
-    if(!this.checkForm.checkFirstName(user.firstName)){
-      console.log("Введіть Ваше ім'я")
-      return false;
-    } else if(!this.checkForm.checkSecondName(user.secondName)){
-      console.log("Введіть Ваше прізвище")
-      return false;
-    } else if(!this.checkForm.checkEmail(user.email)){
-      console.log("Введіть Ваш e-mail")
-      return false;
-    } else if(!this.checkForm.checkPhone(user.phone)){
-      console.log("Введіть Ваш номер телефону")
-      return false;
-    } else if(!this.checkForm.checkLogin(user.login)){
-      console.log("Введіть Ваш логін")
-      return false;
-    } else if(!this.checkForm.checkPassword(user.password)){
-      console.log("Введіть Ваш пароль")
-      return false;
+  initForm(){
+    this.RegisterForm = this.fb.group({
+
+      firstName: ['',[
+        Validators.required,
+        Validators.pattern(/[А-я]/)
+        ]
+        ],
+
+      secondName: ['',[
+           Validators.required,
+           Validators.pattern(/[А-я]/)
+         ]
+         ],
+
+      phone: [null],
+
+      email: ['', [Validators.required, Validators.email]],
+      login: ['',[
+        Validators.required,
+        Validators.pattern(/[A-z+0-9]/)
+      ]
+      ],
+        password: [null]
+    })
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.RegisterForm.controls[controlName];
+
+    const result = control.invalid && control.touched;
+
+    return result;
+  }
+
+  onSubmit() {
+    const controls = this.RegisterForm.controls;
+
+    /** Проверяем форму на валидность */
+    if (this.RegisterForm.invalid) {
+      /** Если форма не валидна, то помечаем все контролы как touched*/
+      Object.keys(controls)
+        .forEach(controlName => controls[controlName].markAsTouched());
+      /** Прерываем выполнение метода*/
+      return;
     }
 
+    /** TODO: Обработка данных формы */
+    console.log(this.RegisterForm.value);
   }
-
 }
